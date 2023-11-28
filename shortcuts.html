@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Home Page</title>
+    <style>
+        body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        .link-container {
+            width: 100px; /* You can adjust the width as needed */
+            margin: 5px;
+            text-align: center; 
+        }
+        .link-container a {
+            display: block;
+            text-decoration: none;
+            color: black;
+            overflow: hidden;
+            border: 1px solid #ddd; /* Optional: adds a border around link items */
+            border-radius: 4px;
+            padding: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: adds shadow for a "card" effect */
+        }
+        .link-container img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 8px; /* Space between image and text */
+        }
+        .link-container span {
+            display: block;
+            font-size: 0.8rem; /* Adjust font size as necessary */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+const websites = [
+    "arstechnica.com",
+    "nytimes.com",
+    "washingtonpost.com",
+    "theatlantic.com",
+    "slate.com",
+    "latimes.com",
+    "berkeleyside.org",
+    "404media.co",
+    "theverge.com",
+    "gizmodo.com",
+    "artsandlettersdaily.com",
+    "aeon.co",
+    "knowablemagazine.org",
+    "lareviewofbooks.org",
+    "nybooks.com",
+    "themarginalian.org",
+    "nautil.us",
+    "quantamagazine.org",
+    "sciencenews.org",
+    "thedriftmag.com",
+    "hedgehogreview.com",
+    "undark.org",
+    "pluralistic.net"
+];
+
+function appendLinkElements() {
+    const container = document.body;
+
+    websites.forEach(site => {
+        const linkElement = document.createElement('div');
+        linkElement.className = 'link-container';
+
+        const a = document.createElement('a');
+        a.href = `https://${site}`;
+        a.target = '_blank'; // Open link in new tab
+        a.rel = 'noopener noreferrer'; // Security measure for opening new tabs
+
+        const img = document.createElement('img');
+        img.src = `https://s2.googleusercontent.com/s2/favicons?domain_url=${site}&sz=64`
+
+        img.alt = site;
+        img.onerror = () => img.src = 'https://via.placeholder.com/64'
+
+        const textSpan = document.createElement('span');
+        textSpan.textContent = site;
+
+        a.appendChild(img);
+        a.appendChild(textSpan);
+        linkElement.appendChild(a);
+        container.appendChild(linkElement);
+    });
+}
+
+appendLinkElements();
+</script>
+
+</body>
+</html>
