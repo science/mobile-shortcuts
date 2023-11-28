@@ -7,7 +7,7 @@
     <style>
         body {
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             background-color: #f5f5f5;
             display: flex;
             flex-wrap: wrap;
@@ -16,39 +16,40 @@
             font-family: Arial, sans-serif;
         }
         .link-container {
-            width: calc(25% - 10px); /* Allows 4 items per row, accounting for 5px margin on both sides */
             margin: 5px;
-            text-align: center;
+            flex: 1;
+            min-width: 70px; /* Minimum width to have at least 4 items per row on mobile */
+            max-width: 120px;
         }
         .link-container a {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-decoration: none;
             color: black;
             border: 1px solid #ddd;
-            padding: 10px;
+            padding: 8px;
             border-radius: 4px;
             background-color: #fff;
-            box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1);
+            box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.2);
         }
         .link-container img {
-            max-width: 100%;
-            height: auto;
+            width: auto; /* Adjusted from max-width to width */
+            max-height: 64px; /* Control height instead of width for consistent size */
+            margin-bottom: 8px;
         }
         .link-container span {
+            font-size: 0.65rem;
+            text-align: center;
+            white-space: nowrap;
             display: block;
-            font-size: 0.9rem;
-            margin-top: 8px;
+            width: 100%; 
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
             .link-container {
-                width: calc(50% - 10px); /* 2 items per row */
-            }
-        }
-        @media (max-width: 480px) {
-            .link-container {
-                width: calc(100% - 10px); /* 1 item per row */
+                min-width: 22%; /* Allows 4 items per row on small devices */
             }
         }
     </style>
@@ -82,9 +83,10 @@ const websites = [
     "pluralistic.net"
 ];
 
+
 function appendLinkElements() {
     const container = document.body;
-
+    
     websites.forEach(site => {
         const linkElement = document.createElement('div');
         linkElement.className = 'link-container';
@@ -96,7 +98,7 @@ function appendLinkElements() {
 
         const img = document.createElement('img');
         img.src = `https://s2.googleusercontent.com/s2/favicons?domain_url=${site}&sz=64`;
-        img.alt = site;
+        img.alt = `${site} favicon`;
         img.onerror = () => img.src = 'https://via.placeholder.com/64';
 
         const textSpan = document.createElement('span');
